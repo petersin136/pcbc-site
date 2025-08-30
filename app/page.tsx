@@ -1,13 +1,14 @@
 // app/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
-import { getSupabase } from "@/lib/supabase/client";
+// no hooks needed in this component
+// import { useEffect, useState } from "react";
+// import { getSupabase } from "@/lib/supabase/client";
 // import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
-  const supabase = getSupabase();
+  // const supabase = getSupabase();
   // const [heroUrl, setHeroUrl] = useState<string | null>(null);
   // const [loadingHero, setLoadingHero] = useState(true);
 
