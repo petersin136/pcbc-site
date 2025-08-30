@@ -1,7 +1,7 @@
 // app/admin/hero/page.tsx
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { getSupabase } from "@/lib/supabase/client";
 
 const MAX_BYTES = 50 * 1024 * 1024; // 50MB
@@ -87,9 +87,10 @@ export default function AdminHeroVideoPage() {
       const { data: pub } = supabase.storage.from("hero").getPublicUrl(path);
       setCurrentUrl(pub.publicUrl);
       setMsg("업로드 완료! 히어로 영상이 교체되었습니다.");
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "업로드 중 오류가 발생했습니다.";
       console.error(err);
-      setMsg(err?.message ?? "업로드 중 오류가 발생했습니다.");
+      setMsg(message);
     } finally {
       setUploading(false);
       setTimeout(() => setProgress(null), 1000);

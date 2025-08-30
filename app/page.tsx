@@ -3,37 +3,37 @@
 
 import { useEffect, useState } from "react";
 import { getSupabase } from "@/lib/supabase/client";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
   const supabase = getSupabase();
-  const [heroUrl, setHeroUrl] = useState<string | null>(null);
-  const [loadingHero, setLoadingHero] = useState(true);
+  // const [heroUrl, setHeroUrl] = useState<string | null>(null);
+  // const [loadingHero, setLoadingHero] = useState(true);
 
-  useEffect(() => {
-    const loadHero = async () => {
-      if (!supabase) {
-        setLoadingHero(false);
-        return;
-      }
-      const { data, error } = await supabase.storage
-        .from("hero")
-        .list("", { sortBy: { column: "created_at", order: "asc" } });
-      if (error) {
-        console.error(error);
-        setLoadingHero(false);
-        return;
-      }
-      const files = (data ?? []).filter((f) => !f.name.startsWith("."));
-      if (files.length > 0) {
-        const { data: pub } = supabase.storage.from("hero").getPublicUrl(files[0].name);
-        setHeroUrl(pub.publicUrl);
-      }
-      setLoadingHero(false);
-    };
-    loadHero();
-  }, [supabase]);
+  // useEffect(() => {
+  //   const loadHero = async () => {
+  //     if (!supabase) {
+  //       setLoadingHero(false);
+  //       return;
+  //     }
+  //     const { data, error } = await supabase.storage
+  //       .from("hero")
+  //       .list("", { sortBy: { column: "created_at", order: "asc" } });
+  //     if (error) {
+  //       console.error(error);
+  //       setLoadingHero(false);
+  //       return;
+  //     }
+  //     const files = (data ?? []).filter((f) => !f.name.startsWith("."));
+  //     if (files.length > 0) {
+  //       const { data: pub } = supabase.storage.from("hero").getPublicUrl(files[0].name);
+  //       setHeroUrl(pub.publicUrl);
+  //     }
+  //     setLoadingHero(false);
+  //   };
+  //   loadHero();
+  // }, [supabase]);
 
   const EnvBanner =
     !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? (
